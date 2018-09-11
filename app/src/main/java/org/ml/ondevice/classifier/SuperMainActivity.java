@@ -27,21 +27,22 @@ public class SuperMainActivity extends Activity {
         setContentView(R.layout.super_activity_main);
         Log.e("LoggingService2", "***********************");
 
-       /*
-        Btn1 = (Button) findViewById(R.id.sensor);
-        Btn2 = (Button) findViewById(R.id.sensor);
+
+        Btn1 = (Button) findViewById(R.id.iris);
+       // Btn2 = (Button) findViewById(R.id.sensor);
 
 
-        createOutput();
+
         Btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               Intent intent = new Intent(SuperMainActivity.this, MainActivity.class);
+               startActivity(intent);
 
-                //  Intent intent = new Intent(SuperMainActivity.this, MainActivity.class);
-                //startActivity(intent);
-                // File fdir = new File(mGlobal.media_path);
             }
         });
+
+        /*
         Btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,14 +57,6 @@ public class SuperMainActivity extends Activity {
 
     }
 
-    private void createOutput() {
-        File fdir = new File(mGlobal.media_path);
-        if (!fdir.isDirectory()) {
-            if (!fdir.mkdirs()) {
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        }
-    }
 
 
 
