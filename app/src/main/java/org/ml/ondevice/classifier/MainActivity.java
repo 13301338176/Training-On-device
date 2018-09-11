@@ -1,4 +1,4 @@
-package org.deeplearning4j.examples.iris_classifier;
+package org.ml.ondevice.classifier;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             int i = 0;
             for(int r=0; r<row; r++){
                 for( int c=0; c<col; c++){
-                    irisMatrix[r][c]= org.deeplearning4j.examples.iris_classifier.DataSet.irisData[i++];
+                    irisMatrix[r][c]= org.ml.ondevice.classifier.DataSet.irisData[i++];
                 }
             }
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             int ii = 0;
             for(int r=0; r<rowLabel; r++){
                 for( int c=0; c<colLabel; c++){
-                    twodimLabel[r][c]= org.deeplearning4j.examples.iris_classifier.DataSet.labelData[ii++];
+                    twodimLabel[r][c]= org.ml.ondevice.classifier.DataSet.labelData[ii++];
                 }
             }
 

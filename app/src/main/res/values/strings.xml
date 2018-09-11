@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IrisClassifier</string>
+    <string name="app_name">OnDeviceTraining</string>
     <string name="classify_iris">CLASSIFY IRIS</string>
     <string name="petal_length">Petal Length</string>
     <string name="petal_width">Petal Width</string>

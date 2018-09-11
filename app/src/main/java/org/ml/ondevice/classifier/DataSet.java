@@ -1,4 +1,4 @@
-package org.deeplearning4j.examples.iris_classifier;
+package org.ml.ondevice.classifier;
 
 public class DataSet {
     //load the raw Iris data set into a java array.
