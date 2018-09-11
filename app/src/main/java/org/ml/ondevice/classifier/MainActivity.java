@@ -1,5 +1,6 @@
 package org.ml.ondevice.classifier;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     //Global variables to accept the classification results from the background thread.
     double first;

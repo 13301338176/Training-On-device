@@ -1,26 +1,26 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+
     defaultConfig {
-        minSdkVersion 23
-        targetSdkVersion 23
+        minSdkVersion 17
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+
 
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath false
             }
         }
-        buildTypes {
-            release {
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            }
 
-        }
+
 
         packagingOptions {
             exclude 'META-INF/DEPENDENCIES'
@@ -34,61 +34,100 @@ android {
             exclude 'META-INF/INDEX.LIST'
 
         }
-    }
-    dependencies {
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
-        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-            exclude group: 'com.android.support', module: 'support-annotations'
-
-        })
-
-        implementation 'com.android.support:appcompat-v7:27.1.0'
-        implementation 'com.android.support:design:27.1.0'
 
 
-        compile(group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-beta2') {
-            exclude group: 'org.bytedeco.javacpp-presets', module: 'opencv-platform'
-            exclude group: 'org.bytedeco.javacpp-presets', module: 'leptonica-platform'
-            exclude group: 'org.bytedeco.javacpp-presets', module: 'hdf5-platform'
-        }
-        compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2'
-        compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-arm"
-        compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-arm64"
-        compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-x86"
-        compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-x86_64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2'
-        compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-arm"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-arm64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-x86"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-x86_64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2'
-        compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-arm"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-arm64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-x86"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-x86_64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2'
-        compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-arm"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-arm64"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-x86"
-        compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-x86_64"
 
-        implementation 'com.google.code.gson:gson:2.8.2'
-        annotationProcessor 'org.projectlombok:lombok:1.16.16'
 
-        implementation 'com.google.code.findbugs:annotations:3.0.1', {
-            exclude module: 'jsr305'
-            exclude module: 'jcip-annotations'
-        }
-
-        //This corrects for a junit version conflict.
-        configurations.all {
-            resolutionStrategy.force 'junit:junit:4.12'
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
 
         }
+
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++14 -frtti -fexceptions"
+            }
+        }
+
+
 
     }
-    buildToolsVersion '27.0.3'
+
+
+    externalNativeBuild {
+        cmake {
+          //  path "CMakeLists.txt"
+        }
+    }
+
+
+
+
 }
+
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+
+    })
+
+
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+
+
+
+    compile(group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-beta2') {
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'opencv-platform'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'leptonica-platform'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'hdf5-platform'
+    }
+    compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2'
+    compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-arm"
+    compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-arm64"
+    compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-x86"
+    compile group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-beta2', classifier: "android-x86_64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2'
+    compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-arm"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-arm64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-x86"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'openblas', version: '0.3.0-1.4.2', classifier: "android-x86_64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2'
+    compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-arm"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-arm64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-x86"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.2-1.4.2', classifier: "android-x86_64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2'
+    compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-arm"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-arm64"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-x86"
+    compile group: 'org.bytedeco.javacpp-presets', name: 'leptonica', version: '1.76.0-1.4.2', classifier: "android-x86_64"
+
+    implementation 'com.google.code.gson:gson:2.8.2'
+    annotationProcessor 'org.projectlombok:lombok:1.16.16'
+
+    implementation 'com.google.code.findbugs:annotations:3.0.1', {
+        exclude module: 'jsr305'
+        exclude module: 'jcip-annotations'
+    }
+
+    //This corrects for a junit version conflict.
+
+
+    configurations.all {
+        resolutionStrategy.force 'junit:junit:4.12'
+
+    }
+
 }
+
+
+
+
+
